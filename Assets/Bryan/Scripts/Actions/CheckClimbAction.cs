@@ -8,7 +8,7 @@ public class CheckClimbAction : FSMAction
     private string finishEvent;
     private bool characterUpOrDown;
     private bool canClimb;
-    private bool onAir;
+    private bool onFloor;
     private Collider2D characterCollider;
     private Collider2D ladderCollider;
     public CheckClimbAction (FSMState owner): base(owner) {}
@@ -20,15 +20,11 @@ public class CheckClimbAction : FSMAction
     {
         this.ladderCollider = ladderCollider;
     }
-    public void SetOnAir(bool onAir)
-    {
-        this.onAir = onAir;
-    }
-    public void Init(float thresholdY, bool characterUpOrDown, bool onAir, Collider2D characterCollider, string finishEvent)
+    public void Init(float thresholdY, bool characterUpOrDown, bool onFloor, Collider2D characterCollider, string finishEvent)
     {
         this.thresholdY = thresholdY;
         this.characterUpOrDown = characterUpOrDown;
-        this.onAir = onAir;
+        this.onFloor = onFloor;
         this.characterCollider = characterCollider;
         this.finishEvent = finishEvent;
     }
@@ -38,7 +34,7 @@ public class CheckClimbAction : FSMAction
         verticalAxis = Input.GetAxis("Vertical");
         if(canClimb)
         {
-            if(!onAir)
+            if(onFloor)
             {
                 if(IsInTop() && verticalAxis < 0)
                 {

@@ -41,17 +41,14 @@ public class ClimbAction : FSMAction
         verticalAxis = Input.GetAxis("Vertical");
         if(IsInTop() && verticalAxis > 0)
         {
-            mcFsm.SetOnAir(false);
             FinishEvent(finishEvent);
             return;
         } else if(IsInBottom() && verticalAxis < 0)
         {
-            mcFsm.SetOnAir(false);
             FinishEvent(finishEvent);
             return;
         } else
         {
-            mcFsm.SetOnAir(true);
             characterTransform.Translate(verticalAxis * Vector2.up * characterRigidbody.gravityScale * speed * 0.02f);
         }
     }

@@ -40,11 +40,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     private JumpAction JumpFloor;
     private JumpAction JumpAir;
     private SmashAction Smash;
-    private ControlCharacterAction ControlCharacterIdle;
-    private ControlCharacterAction ControlCharacterMoving;
-    private ControlCharacterAction ControlCharacterAir;
-    private ControlCharacterAction ControlCharacterClimbing;
-    private ControlCharacterAction ControlCharacterThrowingArm;
     private AttackPlayer Attack;
     [HideInInspector] public CheckClimbAction CheckClimbOnFloor;
     [HideInInspector] public CheckClimbAction CheckClimbOnAir;
@@ -53,7 +48,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     #endregion
     #endregion
     #region Private Variables
-    private bool onAir;
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myCollider;
     private Animator myAnimator;
@@ -66,10 +60,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     [HideInInspector] public Vector2 targetPosTransition;
     #endregion
     #region Gets And Sets
-    public bool GetOnAir()
-    {
-        return onAir;
-    }
     public bool GetCharacterUpOrDown()
     {
         return characterUpOrDown;
@@ -94,10 +84,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     {
         return Smash.GetIsSmashing();
     }
-    public void SetOnAir(bool onAir)
-    {
-        this.onAir = onAir;
-    }
     public void SetOnIdle()
     {
         lastState = GetCurrentState().Name;
@@ -114,7 +100,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     #endregion
     private void Awake()
     {
-        onAir = false;
         onControl = true;
         onTransitionUnion = false;
         myAnimator = GetComponent<Animator>();
@@ -137,43 +122,33 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
 
         // Idle Actions
         Idle = new IdleAction(IdleState);
-        ControlCharacterIdle = new ControlCharacterAction(IdleState);
         // MovementFloorState Actions
         MovementFloor = new MovementAction(MovementFloorState);
         JumpFloor = new JumpAction(MovementFloorState);
         CheckClimbOnFloor = new CheckClimbAction(MovementFloorState);
-        ControlCharacterMoving = new ControlCharacterAction(MovementFloorState);
         // OnAirState Actions
         MovementAir = new MovementAction(OnAirState);
         JumpAir = new JumpAction(OnAirState);
         Smash = new SmashAction(OnAirState);
         CheckClimbOnAir = new CheckClimbAction(OnAirState);
-        ControlCharacterAir = new ControlCharacterAction(OnAirState);
         // Climb Actions
         Climb = new ClimbAction(ClimbState);
-        ControlCharacterClimbing = new ControlCharacterAction(ClimbState);
         // ThrowArm Actions
         ThrowArm = new ThrowArmAction(ThrowArmState);
-        ControlCharacterThrowingArm = new ControlCharacterAction(ThrowArmState);
         // Attack State
         Attack = new AttackPlayer(AttackState);
 
         // Adds actions to the state
         IdleState.AddAction(Idle);
-        IdleState.AddAction(ControlCharacterIdle);
         MovementFloorState.AddAction(MovementFloor);
         MovementFloorState.AddAction(JumpFloor);
         MovementFloorState.AddAction(CheckClimbOnFloor);
-        MovementFloorState.AddAction(ControlCharacterMoving);
         OnAirState.AddAction(MovementAir);
         OnAirState.AddAction(JumpAir);
         OnAirState.AddAction(Smash);
         OnAirState.AddAction(CheckClimbOnAir);
-        OnAirState.AddAction(ControlCharacterAir);
         ClimbState.AddAction(Climb);
-        ClimbState.AddAction(ControlCharacterClimbing);
         ThrowArmState.AddAction(ThrowArm);
-        ThrowArmState.AddAction(ControlCharacterThrowingArm);
         AttackState.AddAction(Attack);
 
         // Set transition to the states
@@ -198,19 +173,14 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
 
         // Initializes the actions
         MovementFloor.Init(transform, speed);
-        JumpFloor.Init(jumpForce, myRigidbody, Smash);
+        JumpFloor.Init(jumpForce, true, myRigidbody, Smash);
         CheckClimbOnFloor.Init(thresholdY, characterUpOrDown, false, myCollider, "ToClimb");
         MovementAir.Init(transform, speed * coefficientSpeedInAir);
-        JumpAir.Init(jumpForce, myRigidbody, Smash);
+        JumpAir.Init(jumpForce, false, myRigidbody, Smash);
         Smash.Init(smashForce, characterUpOrDown, myRigidbody, myCollider);
         CheckClimbOnAir.Init(thresholdY, characterUpOrDown, false, myCollider, "ToClimb");
         Climb.Init(climbSpeed, thresholdY, characterUpOrDown, myRigidbody, myCollider, transform, this, "ToMovement");
         ThrowArm.Init(speedTransition, myRigidbody, transform);
-        ControlCharacterIdle.Init(minDistanceUnionX, this, otherCharacter, "ToMovement", "ToIdle");
-        ControlCharacterMoving.Init(minDistanceUnionX, this, otherCharacter, "ToMovement", "ToIdle");
-        ControlCharacterAir.Init(minDistanceUnionX, this, otherCharacter, "ToMovement", "ToIdle");
-        ControlCharacterClimbing.Init(minDistanceUnionX, this, otherCharacter, "ToMovement", "ToIdle");
-        ControlCharacterThrowingArm.Init(minDistanceUnionX, this, otherCharacter, "ToMovement", "ToIdle");
 
         // Starts FSM
         fsmMC.Start("MovementState");
@@ -229,31 +199,9 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
         if (collision.gameObject.layer == 6)
         {
             Debug.Log("ON FLOOR");
-            CheckClimbOnAir.SetOnAir(false);
-            if(characterUpOrDown)
-            {
-                //if (Mathf.Abs(collision.collider.bounds.max.y - myCollider.bounds.min.y) < 0.05f)
-                    ChangeStatesOnFloor();
-            } else 
-            {
-                //if (Mathf.Abs(collision.collider.bounds.min.y - myCollider.bounds.max.y) < 0.05f)
-                    ChangeStatesOnFloor();
-            }
-            onAir = false;
+            if(GetCurrentState().Name == "OnAirState" || GetCurrentState().Name == "ThrowArmState")
+                GetCurrentState().SendEvent("ToMovement");
             return;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            Debug.Log("ON AIR");
-            CheckClimbOnAir.SetOnAir(true);
-            if(!ThrowArm.GetInTransition() && !onAir && !onTransitionUnion){
-                MovementFloorState.SendEvent("ToOnAir");
-                onAir = true;
-            }
-            
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -267,22 +215,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
         IInteractable objectInteractable = collision.GetComponent<IInteractable>();
         if (objectInteractable != null) 
             StopCoroutine(InteractionCoroutine);
-    }
-    private void ChangeStatesOnFloor()
-    {
-        if (ThrowArm.GetInTransition())
-        {
-            if (onControl)
-                ThrowArmState.SendEvent("ToMovement");
-            else
-                ThrowArmState.SendEvent("ToIdle");
-        }
-        else if (onAir && !onTransitionUnion)
-        {
-            if (onControl && GetCurrentState().Name != "IdleState")
-                OnAirState.SendEvent("ToMovement");
-            onAir = false;
-        }
     }
     #region Coroutines
     private IEnumerator PressKeyInteraction(IInteractable objectInteractable)
@@ -334,10 +266,11 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     #region Public Functions
     private void FinishAttackState()
     {
+        /*
         if (onAir)
             AttackState.SendEvent("ToOnAir");
         else
-            AttackState.SendEvent("ToMovement");
+            AttackState.SendEvent("ToMovement");*/
     }
     public void MoveAgain()
     {

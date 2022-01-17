@@ -45,7 +45,6 @@ public class ThrowArmAction : FSMAction
     public override void OnEnter()
     {
         Debug.Log("THROWING ARM");
-        mcFsm.SetOnAir(true);
         time = 0;
         inTransition = true;
         characterRigidbody.bodyType = RigidbodyType2D.Kinematic;
@@ -61,7 +60,6 @@ public class ThrowArmAction : FSMAction
     }
     public override void OnExit()
     {
-        mcFsm.SetOnAir(false);
         inTransition = false;
         characterRigidbody.bodyType = RigidbodyType2D.Dynamic;
     }

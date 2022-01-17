@@ -31,8 +31,8 @@ public class Ladders : MonoBehaviour
             mcFsm.CheckClimbOnFloor.SetLadderCollider(null);
             mcFsm.CheckClimbOnAir.SetLadderCollider(null);
             mcFsm.Climb.SetLadderCollider(null);
-            if (mcFsm.GetOnAir())
-                mcFsm.Climb.FinishEvent("ToOnAir");
+            //if (mcFsm.GetOnAir())
+            //    mcFsm.Climb.FinishEvent("ToOnAir");
         }
     }
 }

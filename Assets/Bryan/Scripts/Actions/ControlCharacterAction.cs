@@ -27,7 +27,7 @@ public class ControlCharacterAction : FSMAction
         distanceX = Mathf.Abs(thisCharacter.transform.position.x - otherCharacter.transform.position.x);
         if (Input.GetButtonDown("Change Character") && thisCharacter.GetCharacterUpOrDown())
         {
-            if(thisCharacter.onControl && otherCharacter.onControl && !thisCharacter.GetOnAir())
+            if(thisCharacter.onControl && otherCharacter.onControl)
             {
                 Debug.Log("SEPARAOS");
                 otherCharacter.onControl = false;
@@ -50,7 +50,7 @@ public class ControlCharacterAction : FSMAction
             } else 
             {
                 Debug.Log("PUEDE UNIRSE");
-                if(thisCharacter.onControl && !thisCharacter.GetOnAir() && !thisCharacter.onTransitionUnion)
+                if(thisCharacter.onControl && !thisCharacter.onTransitionUnion)
                 {
                     thisCharacter.targetPosTransition = new Vector2(otherCharacter.transform.position.x, thisCharacter.transform.position.y);
                     thisCharacter.GetCurrentState().SendEvent(toIdle);
@@ -58,7 +58,7 @@ public class ControlCharacterAction : FSMAction
                     otherCharacter.onTransitionUnion = false;
                     time = 0;
                     return;
-                } else if(otherCharacter.onControl && !otherCharacter.GetOnAir() && !otherCharacter.onTransitionUnion)
+                } else if(otherCharacter.onControl && !otherCharacter.onTransitionUnion)
                 {
                     Debug.Log("ALINEANDOSE CON EL NEGRO");
                     otherCharacter.targetPosTransition = new Vector2(thisCharacter.transform.position.x, otherCharacter.transform.position.y);
@@ -91,7 +91,7 @@ public class ControlCharacterAction : FSMAction
             {
                 float distanceX;
                 distanceX = Mathf.Abs(thisCharacter.transform.position.x - otherCharacter.transform.position.x);
-                if (distanceX > 0.1f && !thisCharacter.GetOnAir())
+                if (distanceX > 0.1f)
                 {
                     Vector2 targetPos;
                     targetPos = new Vector2(otherCharacter.transform.position.x, thisCharacter.transform.position.y);
