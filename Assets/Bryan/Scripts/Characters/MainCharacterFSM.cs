@@ -21,7 +21,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     [Header("Throw Arm Settings")]
     [SerializeField] private float speedTransition;
     [Header("Spawn Point")]
-    [SerializeField] private Transform Spawn;
+    [SerializeField] private Transform Spawn; 
 
     #region Finite State Machine
     private FSM fsmMC;
