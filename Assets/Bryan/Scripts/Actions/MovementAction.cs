@@ -19,7 +19,7 @@ public class MovementAction : FSMAction
     public override void OnEnter()
     {
         // Change animation to Walk
-        Debug.Log("MOVEMENT ACTION");
+        Debug.Log(GetOwner().Name);
     }
     public override void OnFixedUpdate()
     {

@@ -10,13 +10,14 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     [SerializeField] private float minDistanceUnionX;
     [Header("Movements Settings")]
     [SerializeField] private float speed;
-    [SerializeField][Range(0f,1f)] private float coefficientSpeedInAir;
+    [Header("On Air Settings")]
+    [SerializeField][Range(0f,1f)] private float coefficientSpeedOnAir;
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce;
     [Header("Smash Settings")]
     [SerializeField] private float smashForce;
     [Header("Climb Settings")]
-    [SerializeField] private float climbSpeed;
+    [SerializeField][Range(0f,1f)] private float coefficientSpeedClimbing;
     [SerializeField][Range(0f,0.1f)] private float thresholdY;
     [Header("Throw Arm Settings")]
     [SerializeField] private float speedTransition;
@@ -39,6 +40,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     private MovementAction MovementAir;
     private JumpAction JumpFloor;
     private JumpAction JumpAir;
+    private JumpAction JumpClimb;
     private SmashAction Smash;
     private AttackPlayer Attack;
     [HideInInspector] public CheckClimbAction CheckClimbOnFloor;
@@ -53,6 +55,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     private Animator myAnimator;
     private Coroutine InteractionCoroutine;
     private string lastState;
+    private bool triggeringFloor;
     #endregion
     #region Public Variable
     [HideInInspector] public bool onControl;
@@ -63,6 +66,10 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     public bool GetCharacterUpOrDown()
     {
         return characterUpOrDown;
+    }
+    public bool GetTriggeringFloor()
+    {
+        return triggeringFloor;
     }
     public MainCharacterFSM GetOtherCharacter()
     {
@@ -133,6 +140,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
         CheckClimbOnAir = new CheckClimbAction(OnAirState);
         // Climb Actions
         Climb = new ClimbAction(ClimbState);
+        JumpClimb = new JumpAction(ClimbState);
         // ThrowArm Actions
         ThrowArm = new ThrowArmAction(ThrowArmState);
         // Attack State
@@ -148,6 +156,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
         OnAirState.AddAction(Smash);
         OnAirState.AddAction(CheckClimbOnAir);
         ClimbState.AddAction(Climb);
+        ClimbState.AddAction(JumpClimb);
         ThrowArmState.AddAction(ThrowArm);
         AttackState.AddAction(Attack);
 
@@ -173,17 +182,18 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
 
         // Initializes the actions
         MovementFloor.Init(transform, speed);
-        JumpFloor.Init(jumpForce, true, myRigidbody, Smash);
-        CheckClimbOnFloor.Init(thresholdY, characterUpOrDown, false, myCollider, "ToClimb");
-        MovementAir.Init(transform, speed * coefficientSpeedInAir);
-        JumpAir.Init(jumpForce, false, myRigidbody, Smash);
+        JumpFloor.Init(jumpForce, true, "ToOnAir",myRigidbody, myCollider, Smash);
+        CheckClimbOnFloor.Init(thresholdY, characterUpOrDown, true, myCollider, "ToClimb");
+        MovementAir.Init(transform, speed * coefficientSpeedOnAir);
+        JumpAir.Init(jumpForce, false, "",myRigidbody, myCollider, Smash);
         Smash.Init(smashForce, characterUpOrDown, myRigidbody, myCollider);
         CheckClimbOnAir.Init(thresholdY, characterUpOrDown, false, myCollider, "ToClimb");
-        Climb.Init(climbSpeed, thresholdY, characterUpOrDown, myRigidbody, myCollider, transform, this, "ToMovement");
+        Climb.Init(speed * coefficientSpeedClimbing, thresholdY, characterUpOrDown, myRigidbody, myCollider, transform, this, "ToMovement");
+        JumpClimb.Init(jumpForce, true, "ToOnAir", myRigidbody, myCollider, Smash);
         ThrowArm.Init(speedTransition, myRigidbody, transform);
 
         // Starts FSM
-        fsmMC.Start("MovementState");
+        fsmMC.Start("OnAirState");
     }
     // Update is called once per frame
     private void Update()
@@ -206,12 +216,26 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.layer == 6)
+        {
+            triggeringFloor = true;
+            return;
+        }
         IInteractable objectInteractable = collision.GetComponent<IInteractable>();
         if (objectInteractable != null)
             InteractionCoroutine = StartCoroutine(PressKeyInteraction(objectInteractable));
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(collision.gameObject.layer == 6)
+        {
+            if(triggeringFloor && GetCurrentState().Name == "OnAirState")
+            {
+                myCollider.isTrigger = false;
+            }
+            triggeringFloor = false;
+            return;
+        }
         IInteractable objectInteractable = collision.GetComponent<IInteractable>();
         if (objectInteractable != null) 
             StopCoroutine(InteractionCoroutine);

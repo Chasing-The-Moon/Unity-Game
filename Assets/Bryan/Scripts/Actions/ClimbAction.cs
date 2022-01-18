@@ -8,6 +8,7 @@ public class ClimbAction : FSMAction
     private float thresholdY;
     private string finishEvent;
     private bool characterUpOrDown;
+    private bool onFloor;
     private Transform characterTransform;
     private Rigidbody2D characterRigidbody;
     private Collider2D characterCollider;
@@ -31,6 +32,7 @@ public class ClimbAction : FSMAction
     }
     public override void OnEnter()
     {
+        Debug.Log("CLIMBING");
         characterRigidbody.velocity = Vector2.zero;
         characterRigidbody.bodyType = RigidbodyType2D.Kinematic;
         characterCollider.isTrigger = true;
@@ -41,21 +43,25 @@ public class ClimbAction : FSMAction
         verticalAxis = Input.GetAxis("Vertical");
         if(IsInTop() && verticalAxis > 0)
         {
+            onFloor = true;
             FinishEvent(finishEvent);
             return;
         } else if(IsInBottom() && verticalAxis < 0)
         {
+            onFloor = true;
             FinishEvent(finishEvent);
             return;
         } else
         {
-            characterTransform.Translate(verticalAxis * Vector2.up * characterRigidbody.gravityScale * speed * 0.02f);
+            onFloor = false;
+            characterTransform.Translate(new Vector3(Input.GetAxis("Horizontal"), verticalAxis * characterRigidbody.gravityScale, 0) * speed * 0.02f);
         }
     }
     public override void OnExit()
     {
         characterRigidbody.bodyType = RigidbodyType2D.Dynamic;
-        characterCollider.isTrigger = false;
+        if(onFloor)
+            characterCollider.isTrigger = false;
     }
     private bool IsInTop()
     {

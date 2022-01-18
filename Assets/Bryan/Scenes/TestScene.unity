@@ -788,10 +788,10 @@ MonoBehaviour:
   otherCharacter: {fileID: 1872119155}
   minDistanceUnionX: 1
   speed: 3
-  coefficientSpeedInAir: 0.7
+  coefficientSpeedOnAir: 0.7
   jumpForce: 300
   smashForce: 500
-  climbSpeed: 1.5
+  coefficientSpeedClimbing: 0.5
   thresholdY: 0.05
   speedTransition: 1
   Spawn: {fileID: 1754794075}
@@ -1945,10 +1945,10 @@ MonoBehaviour:
   otherCharacter: {fileID: 659866055}
   minDistanceUnionX: 1
   speed: 3
-  coefficientSpeedInAir: 0.7
+  coefficientSpeedOnAir: 0.7
   jumpForce: 300
   smashForce: 500
-  climbSpeed: 1.5
+  coefficientSpeedClimbing: 0.5
   thresholdY: 0.05
   speedTransition: 1
   Spawn: {fileID: 537677814}
@@ -2281,7 +2281,6 @@ GameObject:
   - component: {fileID: 2121997576}
   - component: {fileID: 2121997581}
   - component: {fileID: 2121997580}
-  - component: {fileID: 2121997582}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2416,40 +2415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 659866054}
---- !u!114 &2121997582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121997575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0

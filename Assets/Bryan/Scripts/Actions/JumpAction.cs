@@ -6,17 +6,21 @@ public class JumpAction: FSMAction
 {
     private Rigidbody2D characterRigidbody;
     private SmashAction smashAction;
+    private Collider2D characterCollider;
     private float forceJump;
     private int numJumps;
+    private string newState;
     private bool canJump;
-    private bool onFloor;
+    private bool changeState;
     public JumpAction (FSMState owner): base(owner) { }
-    public void Init(float forceJump, bool onFloor, Rigidbody2D characterRigidbody, SmashAction smashAction)
+    public void Init(float forceJump, bool changeState, string newState, Rigidbody2D characterRigidbody, Collider2D characterCollider, SmashAction smashAction)
     {
         this.forceJump = forceJump;
         this.characterRigidbody = characterRigidbody;
         this.smashAction = smashAction;
-        this.onFloor = onFloor;
+        this.changeState = changeState;
+        this.newState = newState;
+        this.characterCollider = characterCollider;
         numJumps = 1;
         canJump = false;
     }
@@ -28,7 +32,6 @@ public class JumpAction: FSMAction
     {
         if(Input.GetButtonDown("Jump") && numJumps > 0 && !smashAction.GetIsSmashing())
         {
-            Debug.Log("PRESS JUMP BUTTON");
             canJump = true;
             numJumps--;
         }
@@ -38,11 +41,13 @@ public class JumpAction: FSMAction
         if(canJump)
         {
             Debug.Log("JUMP ACTION");
+            characterRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            //characterCollider.isTrigger = false;
             characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, 0);
             characterRigidbody.AddForce(Vector2.up * forceJump * characterRigidbody.gravityScale);
+            if(changeState)
+                FinishState(newState);
             canJump = false;
-            if(onFloor)
-                FinishState("ToOnAir");
         }
     }
     public override void OnExit()
