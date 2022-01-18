@@ -2744,6 +2744,102 @@ PolygonCollider2D:
       - {x: -3.3333335, y: -2.6830523}
       - {x: -1.6408149, y: -2.997109}
       - {x: -1.5216899, y: -3.3333335}
+--- !u!1 &734309326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734309330}
+  - component: {fileID: 734309329}
+  - component: {fileID: 734309328}
+  - component: {fileID: 734309327}
+  m_Layer: 0
+  m_Name: Event1 (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &734309327
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734309326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.61520505, y: -0.9911728}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.299304, y: 2.9823446}
+  m_EdgeRadius: 0
+--- !u!114 &734309328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734309326}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e90268ba14fe76458b7cd1c7eec40fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  CharacterisIdle: 0
+--- !u!114 &734309329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734309326}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b21574d0861664992e8b9ab3602efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  SecCamera: {fileID: 34702585297978946}
+  EventNumber: 3
+  EventZoomValue: 10.19
+  Speed: 2.59
+  isZoominEvent: 0
+  isZoomOutEvent: 1
+  TransitionTimer: 2
+  StartEventAfterTimer: 3
+  EndEventAfterTimer: 9
+  NumberOfObjectToFollow: 3
+--- !u!4 &734309330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734309326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.38, y: 2.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 52
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &734887129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,7 +3212,7 @@ SpriteRenderer:
   m_Size: {x: 40, y: 40}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &834126267
@@ -6647,6 +6743,102 @@ Transform:
   m_Father: {fileID: 488989160}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1458369857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1458369861}
+  - component: {fileID: 1458369860}
+  - component: {fileID: 1458369859}
+  - component: {fileID: 1458369858}
+  m_Layer: 0
+  m_Name: Event1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1458369858
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458369857}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.61520505, y: -0.9911728}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.299304, y: 2.9823446}
+  m_EdgeRadius: 0
+--- !u!114 &1458369859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458369857}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e90268ba14fe76458b7cd1c7eec40fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  CharacterisIdle: 0
+--- !u!114 &1458369860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458369857}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b21574d0861664992e8b9ab3602efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  SecCamera: {fileID: 34702585297978946}
+  EventNumber: 2
+  EventZoomValue: 0.45
+  Speed: 5
+  isZoominEvent: 0
+  isZoomOutEvent: 0
+  TransitionTimer: 2
+  StartEventAfterTimer: 3
+  EndEventAfterTimer: 9
+  NumberOfObjectToFollow: 3
+--- !u!4 &1458369861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458369857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.46, y: 6.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 51
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1462760715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7130,6 +7322,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 42
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1622462578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622462582}
+  - component: {fileID: 1622462581}
+  - component: {fileID: 1622462580}
+  - component: {fileID: 1622462579}
+  m_Layer: 0
+  m_Name: Event1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1622462579
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622462578}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.61520505, y: -0.9911728}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.299304, y: 2.9823446}
+  m_EdgeRadius: 0
+--- !u!114 &1622462580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622462578}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e90268ba14fe76458b7cd1c7eec40fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  CharacterisIdle: 0
+--- !u!114 &1622462581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622462578}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b21574d0861664992e8b9ab3602efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 3388978811352270567}
+  SecCamera: {fileID: 34702585297978946}
+  EventNumber: 1
+  EventZoomValue: 0.9
+  Speed: 0.75
+  isZoominEvent: 1
+  isZoomOutEvent: 0
+  TransitionTimer: 1
+  StartEventAfterTimer: 1
+  EndEventAfterTimer: 7
+  NumberOfObjectToFollow: 1
+--- !u!4 &1622462582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622462578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.09, y: 2.52, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1645222624
 GameObject:
@@ -10035,6 +10323,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 34702585297979007}
   OrthographicSize: 0
   CameraNumber: 2
+  VarCinemachineFramingTransposer: {fileID: 0}
+  CameraBrain: {fileID: 0}
   IsCharacter1Sleeping: 0
   IsCharacter2Sleeping: 0
   ZoomOut: 0
@@ -10049,6 +10339,7 @@ MonoBehaviour:
   EventChangeFollowTarget: 0
   NewObjectToFollow1: {fileID: 1927856549}
   NewObjectToFollow2: {fileID: 1818209657}
+  ObjectsListToFollow: []
   EventChangeCamera: 0
   CameraCurrnetPriority: 0
   CameraNewPriority: 0
@@ -10065,11 +10356,11 @@ MonoBehaviour:
   FinishZoomOutEvents:
     m_PersistentCalls:
       m_Calls: []
-  timer: 0
-  timerSet: 3
-  timeFinish: 0
-  timerSet2: 6
-  timer22: 0
+  Pausemenue: {fileID: 0}
+  TransitionTimer: 0
+  StartEventAfterTimer: 0
+  EndEventAfterTimer: 0
+  NumberOfObjectToFollow: 0
 --- !u!114 &34702585297978945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10293,6 +10584,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 967452094996294112}
   OrthographicSize: 0
   CameraNumber: 0
+  VarCinemachineFramingTransposer: {fileID: 0}
+  CameraBrain: {fileID: 0}
   IsCharacter1Sleeping: 0
   IsCharacter2Sleeping: 0
   ZoomOut: 0
@@ -10307,6 +10600,7 @@ MonoBehaviour:
   EventChangeFollowTarget: 0
   NewObjectToFollow1: {fileID: 0}
   NewObjectToFollow2: {fileID: 0}
+  ObjectsListToFollow: []
   EventChangeCamera: 0
   CameraCurrnetPriority: 0
   CameraNewPriority: 0
@@ -10323,11 +10617,11 @@ MonoBehaviour:
   FinishZoomOutEvents:
     m_PersistentCalls:
       m_Calls: []
-  timer: 0
-  timerSet: 3
-  timeFinish: 0
-  timerSet2: 6
-  timer22: 0
+  Pausemenue: {fileID: 0}
+  TransitionTimer: 0
+  StartEventAfterTimer: 0
+  EndEventAfterTimer: 0
+  NumberOfObjectToFollow: 0
 --- !u!114 &967452094996294114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10520,7 +10814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864840034774609251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.444, y: 1.319, z: 0}
+  m_LocalPosition: {x: -3.59, y: 1.319, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -20061,7 +20355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2879581685676723298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.68949, y: -0.90259933, z: -11}
+  m_LocalPosition: {x: 1.7326984, y: 0.03548646, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -20212,6 +20506,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 3388978811352270566}
   OrthographicSize: 0
   CameraNumber: 1
+  VarCinemachineFramingTransposer: {fileID: 0}
+  CameraBrain: {fileID: 2879581685676723305}
   IsCharacter1Sleeping: 0
   IsCharacter2Sleeping: 0
   ZoomOut: 0
@@ -20224,8 +20520,13 @@ MonoBehaviour:
   OriginZoomSpeed: 1
   OriginZoomValue: 0
   EventChangeFollowTarget: 0
-  NewObjectToFollow1: {fileID: 1932477381353981894}
+  NewObjectToFollow1: {fileID: 0}
   NewObjectToFollow2: {fileID: 1927856549}
+  ObjectsListToFollow:
+  - {fileID: 0}
+  - {fileID: 1932477381353981894}
+  - {fileID: 1932477381353981894}
+  - {fileID: 48135204}
   EventChangeCamera: 0
   CameraCurrnetPriority: 0
   CameraNewPriority: 0
@@ -20278,23 +20579,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4235497213476770923}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  timer: 0
-  timerSet: 10
-  timeFinish: 0
-  timerSet2: 6
-  timer22: 0
+  Pausemenue: {fileID: 6580461293139697393}
+  TransitionTimer: 0
+  StartEventAfterTimer: 0
+  EndEventAfterTimer: 0
+  NumberOfObjectToFollow: 0
 --- !u!4 &3388978811352270561
 Transform:
   m_ObjectHideFlags: 0
@@ -20303,7 +20592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3388978811352270567}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.08, y: -0.5805001, z: -11}
+  m_LocalPosition: {x: -3.953998, y: -0.5805001, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3388978810288220348}
@@ -20622,6 +20911,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4235497213476770923}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   StoneObjectPanel: {fileID: 0}
   StoneObjectText: {fileID: 0}
 --- !u!4 &4235497213476770917
@@ -20920,7 +21221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6413248707470277493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.716003, y: -2.48, z: 0}
+  m_LocalPosition: {x: -4.317996, y: -2.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -20973,7 +21274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6463507654893341405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.154774, y: -0.19030854, z: 0}
+  m_LocalPosition: {x: -3.8792262, y: -0.19030854, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -21261,7 +21562,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 3388978811352270567}
+  SecCamera: {fileID: 34702585297978946}
   EventNumber: 1
+  EventZoomValue: 0.5
+  Speed: 0.5
+  isZoominEvent: 1
+  isZoomOutEvent: 0
+  TransitionTimer: 0
+  StartEventAfterTimer: 0
+  EndEventAfterTimer: 0
+  NumberOfObjectToFollow: 0
 --- !u!4 &9062099200217453593
 Transform:
   m_ObjectHideFlags: 0
