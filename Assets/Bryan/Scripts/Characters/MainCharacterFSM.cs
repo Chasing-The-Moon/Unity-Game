@@ -7,7 +7,6 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     [Header("Character Settings")]
     [SerializeField] private bool characterUpOrDown;
     [SerializeField] private MainCharacterFSM otherCharacter;
-    [SerializeField] private float minDistanceUnionX;
     [Header("Movements Settings")]
     [SerializeField] private float speed;
     [Header("On Air Settings")]
@@ -20,7 +19,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     [SerializeField][Range(0f,1f)] private float coefficientSpeedClimbing;
     [SerializeField][Range(0f,0.1f)] private float thresholdY;
     [Header("Throw Arm Settings")]
-    [SerializeField] private float speedTransition;
+    [SerializeField][Range(0f, 1.5f)] private float speedTransition;
     [Header("Spawn Point")]
     [SerializeField] private Transform Spawn; 
 
@@ -190,7 +189,7 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
         CheckClimbOnAir.Init(thresholdY, characterUpOrDown, false, myCollider, "ToClimb");
         Climb.Init(speed * coefficientSpeedClimbing, thresholdY, characterUpOrDown, myRigidbody, myCollider, transform, this, "ToMovement");
         JumpClimb.Init(jumpForce, true, "ToOnAir", myRigidbody, myCollider, Smash);
-        ThrowArm.Init(speedTransition, myRigidbody, transform);
+        ThrowArm.Init(speedTransition, myRigidbody, myCollider, transform);
 
         // Starts FSM
         fsmMC.Start("OnAirState");
@@ -218,7 +217,10 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     {
         if(collision.gameObject.layer == 6)
         {
-            triggeringFloor = true;
+            if(GetCurrentState().Name == "ClimbState")
+                triggeringFloor = true;
+            if (GetCurrentState().Name == "ThrowArmState")
+                ThrowArmState.SendEvent("ToMovement");
             return;
         }
         IInteractable objectInteractable = collision.GetComponent<IInteractable>();
@@ -269,10 +271,11 @@ public class MainCharacterFSM : MonoBehaviour, IKillable
     #endregion
     public void Kill()
     {
+        if (GetCurrentState().Name == "ThrowArmState")
+            ThrowArmState.SendEvent("ToMovement");
         myRigidbody.velocity = Vector2.zero;
-        otherCharacter.myRigidbody.velocity = Vector2.zero;
         transform.position = new Vector3(Spawn.position.x, Spawn.position.y, transform.position.z);
-        otherCharacter.transform.position = new Vector3(otherCharacter.Spawn.position.x, otherCharacter.Spawn.position.y, otherCharacter.transform.position.z);
+        //otherCharacter.Kill();
     }
     #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()

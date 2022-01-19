@@ -9,11 +9,10 @@ public class ThrowArmAction : FSMAction
     private float heightParabola;
     private bool inTransition = false;
     private Vector2 startParabola;
-    private Vector2 pivotPos;
     private Vector2 endParabola;
     private Rigidbody2D characterRigidbody;
+    private Collider2D characterCollider;
     private Transform characterTransform;
-    private MainCharacterFSM mcFsm;
     public ThrowArmAction(FSMState owner): base(owner) {}
     public bool GetInTransition()
     {
@@ -27,40 +26,34 @@ public class ThrowArmAction : FSMAction
     {
         this.startParabola = startParabola;
     }
-    public void SetPivotPosition(Vector2 pivotPos)
-    {
-        this.pivotPos = pivotPos;
-    }
     public void SetEndParabola(Vector2 endParabola)
     {
         this.endParabola = endParabola;
     }
-    public void Init(float speed, Rigidbody2D characterRigidbody, Transform characterTransform)
+    public void Init(float speed, Rigidbody2D characterRigidbody, Collider2D characterCollider,Transform characterTransform)
     {
         this.speed = speed;
         this.characterRigidbody = characterRigidbody;
         this.characterTransform = characterTransform;
-        mcFsm = characterTransform.GetComponent<MainCharacterFSM>();
+        this.characterCollider = characterCollider;
     }
     public override void OnEnter()
     {
         Debug.Log("THROWING ARM");
         time = 0;
         inTransition = true;
+        characterCollider.isTrigger = true;
         characterRigidbody.bodyType = RigidbodyType2D.Kinematic;
     }
     public override void OnFixedUpdate()
     {
         time += Time.fixedDeltaTime;
         characterTransform.position = Parabola(startParabola, endParabola, heightParabola, time * speed);
-        if(time * speed > 0.6f && characterTransform.position.y * characterRigidbody.gravityScale < pivotPos.y * characterRigidbody.gravityScale)
-        {
-            characterRigidbody.bodyType = RigidbodyType2D.Dynamic;
-        }
     }
     public override void OnExit()
     {
         inTransition = false;
+        characterCollider.isTrigger = false;
         characterRigidbody.bodyType = RigidbodyType2D.Dynamic;
     }
     private Vector2 Parabola(Vector2 start, Vector2 end, float height, float time)

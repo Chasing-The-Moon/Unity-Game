@@ -11,10 +11,14 @@ public class Traps : MonoBehaviour, IKillable
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IKillable killable = collision.GetComponent<IKillable>();
-        if(killable != null)
+        if(collision.tag == "Player")
         {
-            killable.Kill();
+            IKillable killable = collision.GetComponent<IKillable>();
+            if (killable != null)
+            {
+                Debug.Log("KILL PLAYER");
+                killable.Kill();
+            }
         }
     }
     public void Kill()
